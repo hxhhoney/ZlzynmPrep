@@ -1,0 +1,61 @@
+/*
+Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+Example 1:
+
+11110
+11010
+11000
+00000
+Answer: 1
+
+Example 2:
+
+11000
+11000
+00100
+00011
+Answer: 3
+
+Credits:
+Special thanks to @mithmatt for adding this problem and creating all test cases.
+*/
+/**
+ public class Solution {
+    public void DFS(char[][] grid, int i,int j)
+    {
+        int x[]={-1,0,0,1};
+        int y[]={0,-1,1,0};
+        for(int k=0;k<4;k++)
+        {
+            int kx=i+x[k];
+            int ky=j+y[k];
+            if(kx<0||ky<0||kx>=grid.length||ky>=grid[0].length)
+            continue;
+            if(grid[kx][ky]=='1')
+            {
+             grid[kx][ky]='0';
+             DFS(grid,kx,ky);
+            }
+        }
+        
+        
+    }
+    public int numIslands(char[][] grid) {
+        int num=0;
+        for(int i=0;i<grid.length;i++)
+        {
+            for(int j=0;j<grid[0].length;j++)
+            {
+                if(grid[i][j]=='1')
+                {
+                    num++;
+                    grid[i][j]='2';
+                    DFS(grid,i,j);
+                    
+                }
+            }
+        }
+        return num;
+    }
+}
