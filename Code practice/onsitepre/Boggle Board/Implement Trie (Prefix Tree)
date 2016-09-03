@@ -13,17 +13,18 @@ You may assume that all inputs are consist of lowercase letters a-z.
 */
 class TrieNode {
     // Initialize your data structure here.
-    char ch;
-    boolean isEnd = false;
-    Map<Character, TrieNode> children = new HashMap<Character, TrieNode>();
-    
-    public TrieNode() {}
-    public TrieNode(char ch) { this.ch = ch;}
+    char parent;
+    boolean isend=false;
+    Map<Character,TrieNode> kid=new HashMap<>();
+    public TrieNode() {
+    }
+    public TrieNode(char parent){
+        this.parent=parent;
+    }
 }
 
 public class Trie {
     private TrieNode root;
-
 
     public Trie() {
         root = new TrieNode();
@@ -31,46 +32,46 @@ public class Trie {
 
     // Inserts a word into the trie.
     public void insert(String word) {
-      TrieNode cur = root;
-      for(int i = 0; i < word.length(); i++){
-          char ch = word.charAt(i);
-          if(cur.children.containsKey(ch)){
-              cur = cur.children.get(ch);
-          }
-          else{
-              TrieNode tmp = new TrieNode(ch);
-              cur.children.put(ch, tmp);
-              cur = tmp;
-          }
-      }
-      cur.isEnd = true;
+        TrieNode cur=root;
+        for(int i=0;i<word.length();i++){
+            if(cur.kid.containsKey(word.charAt(i)))
+            {
+                cur=cur.kid.get(word.charAt(i));
+            }
+            else
+            {
+                TrieNode temp=new TrieNode(word.charAt(i));
+                cur.kid.put(word.charAt(i),temp);
+                cur=temp;
+            }
+        }
+        cur.isend=true;
     }
 
     // Returns if the word is in the trie.
     public boolean search(String word) {
-        TrieNode cur = root;
-        for(int i = 0; i < word.length(); i++){
-            char ch = word.charAt(i);
-            if(cur.children.containsKey(ch)){
-                cur = cur.children.get(ch);
-            }
-            else{
-                return false;
-            }
+        TrieNode cur=root;
+        for(int i=0;i<word.length();i++)
+        {
+            if(!cur.kid.containsKey(word.charAt(i)))
+            return false;
+            else
+            cur=cur.kid.get(word.charAt(i));
         }
-        return cur.isEnd;
+        return cur.isend;
     }
 
     // Returns if there is any word in the trie
     // that starts with the given prefix.
     public boolean startsWith(String prefix) {
-        TrieNode cur = root;
-        for(int i = 0; i < prefix.length(); i++){
-            char ch = prefix.charAt(i);
-            if(cur.children.containsKey(ch)){
-                cur = cur.children.get(ch);
+        TrieNode cur=root;
+        for(int i=0;i<prefix.length();i++){
+            if(cur.kid.containsKey(prefix.charAt(i)))
+            {
+                cur=cur.kid.get(prefix.charAt(i));
             }
-            else{
+            else
+            {
                 return false;
             }
         }
