@@ -1,37 +1,4 @@
-/**
-Given a 2D board and a list of words from the dictionary, find all words in the board.
 
-Each word must be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.
-
-For example,
-Given words = ["oath","pea","eat","rain"] and board =
-
-[
-  ['o','a','a','n'],
-  ['e','t','a','e'],
-  ['i','h','k','r'],
-  ['i','f','l','v']
-]
-Return ["eat","oath"].
-Note:
-You may assume that all inputs are consist of lowercase letters a-z.
-**/
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @hxhhoney
- Watch 2
-  Unstar 2
-  Fork 0 Yanhan0507/Z-Practice
- Code  Issues 0  Pull requests 0  Wiki  Pulse  Graphs
-Tree: aa736be82a Find file Copy pathZ-Practice/Word Sear ii
-af0e592  on Sep 5, 2015
-@Yanhan0507 Yanhan0507 Create Word Sear ii
-1 contributor
-RawBlameHistory     131 lines (109 sloc)  3.59 KB
 /*
 Given a 2D board and a list of words from the dictionary, find all words in the board.
 
@@ -146,10 +113,4 @@ class Trie{
         }
         return true;
     }
-    //Trie Node
-class TrieNode{
-    public TrieNode[] children = new TrieNode[26];
-    public String item = "";
-}
- 
 }
