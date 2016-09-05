@@ -74,8 +74,6 @@ public class WordDictionary {
 					}
 				}
 			}
- 
-	
 				
 		} else {
 			int index = c - 'a';

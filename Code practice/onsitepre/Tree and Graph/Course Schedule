@@ -1,0 +1,89 @@
+/**
+There are a total of n courses you have to take, labeled from 0 to n - 1.
+
+Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
+
+Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
+
+For example:
+
+2, [[1,0]]
+There are a total of 2 courses to take. To take course 1 you should have finished course 0. So it is possible.
+
+2, [[1,0],[0,1]]
+There are a total of 2 courses to take. To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.
+
+Note:
+The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how a graph is represented.
+
+**/
+//(1)DFS+BACKTRACKING,  Time Limit Exceeded
+public class Solution {
+    HashMap<Integer,List<Integer>>hmap=new HashMap<Integer,List<Integer>>();
+    public boolean DFS(HashMap<Integer,List<Integer>>hmap,int j, boolean[] visited){
+        if(visited[j]==true)
+        return false;
+        if(!hmap.containsKey(j))
+        return true;
+        visited[j]=true;
+        for(int i=0;i<hmap.get(j).size();i++){
+            if(!DFS(hmap,hmap.get(j).get(i),visited))
+            return false;
+        }
+        visited[j]=false;
+        return true;
+        
+    }
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        for(int i=0;i<prerequisites.length;i++){
+           if(!hmap.containsKey(prerequisites[i][1])){
+               List<Integer> next=new ArrayList<Integer>();
+               next.add(prerequisites[i][0]);
+               hmap.put(prerequisites[i][1],next);
+           }
+           else
+           hmap.get(prerequisites[i][1]).add(prerequisites[i][0]);
+        }
+        boolean[] visited=new boolean[numCourses];
+        for(int j=0;j<numCourses;j++){
+           if(!DFS(hmap,j,visited))
+           return false;
+        }
+        return true;
+    }
+}
+
+//(2)Topological sort
+public class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> board=new ArrayList<>();
+        int[] inflow=new int[numCourses];
+        for(int i=0;i<numCourses;i++){
+            List<Integer> sub=new ArrayList<Integer>();
+            board.add(sub);
+        }
+        for(int j=0;j<prerequisites.length;j++)
+        {
+            board.get(prerequisites[j][1]).add(prerequisites[j][0]);
+            inflow[prerequisites[j][0]]++;
+        }
+        
+        for(int k=0;k<numCourses;k++){
+            int l=0;
+            while(l<numCourses)
+            {
+                if(inflow[l]==0)
+                break;
+                l++;
+            }
+            if(l==numCourses)
+            return false;
+            
+            for(int next:board.get(l)){
+                inflow[next]--;
+            }
+            inflow[l]=-1;
+        }
+        return true;
+    }
+}
