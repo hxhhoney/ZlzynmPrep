@@ -1,0 +1,57 @@
+Interviewer 1: 
+Deals with ambiguity
+
+Situation: 
+Our customer Toyota gave my PM a new version of string table design, and my PM require me to update and merge all the string tables into our source code within 1 day so that he can have a meeting with toyota the second day.
+Task：
+My task is to update and merge all these new design within one day.
+But there are problems:1. The strings are too many, I can update them within one day, but we do not have time to test all these updated designs, which means a great risk to break the whole system if merged. 2. There are some string designs seems unnecessary or conflict to the view of the app dev owner. And they won’t approve the correlated merge.
+
+Action:
+
+1.Ask different app dev owner to give me a list that shows which strings they do not agree to merge and why.
+2.Give PM an unmerged vision of 100% updated string design so that he can have meeting first the second day. Also give him the excel sheets above so that he can discuss those disagreed strings with Toyota.
+4. Update and test the acceptable part of string designs, and let them to be approved  and merged by app dev owners later. 
+5. Once I got the final confirmed string design from PM when he come back, I update the rest strings.
+
+Result:
+1. My PM had updated string design code to have the meeting the second day. I meet his most important requirements.
+2. My PM can discuss the conflicting part with our customer with my excel sheet.
+3. We have time to test the change before merge them.We do not need to take the risk to broke our system while guarantee our final quality.
+
+Interviewer 2: 
+ Deliver Results, Are Right A Lot
+Situation:
+When QA reproduce senerioes,our system will produce bento logs. Since there are always many QAs testing at the same time, and the timestamp is accurate to million second,the logs are in mass, especially load balancer distribute these request to different server.  
+Task: One day I receive a bug and need to read these bento logs to find out related http requests and responses. I noticed it is very hard to find the useful information since there are too much  redundancy information and I need to check several logs at the same time since request can be sent to different logs.
+Action:
+1.I develop a tool Logfilter and use it to choice  
+Result:
+
+Interviewer 3: 
+Insist on Highest Standards
+Situation: 
+Our stringstable are put in the source code(not hard code)and although now we only have English version, French version, it already takes so many memories and also it is inconvenient to add and delete strings, because every time I do these operations,I need to open different directories in source code. And there are many duplicate stringtables. 
+Task: 
+I think although these string tables stored in source code works well for apps, I should find a better way to store and manage these string tables. 
+Action:
+1.Designed a database, that does not have duplicate strings, and is scalable to add new languages,  and also easy to be maintained.
+2.Develop a tool to obtain strings from database and generate stringtables and store these stringtables into required directory.
+
+Result:
+1. We do not need to open so many directories to change our documents, we just need to change it in a database.Our tool will store them in required directory later.
+3. If our customer ask us to give them strings to translate, we can give them one version without duplicate strings.
+4. Since our strings are in database, it saves a lot memory for the source code.
+
+
+
+Interviewer 4: 
+Leadership Principle: Bias for Action
+Situation:
+I designed a database to store our data, but since there are 8 tables for this database, my manager think it is not easy to be managed. Because if we need to change one string in our required document, we might need to input 8 queries for the database. And it is always lead to mistakes if someone is not that familiar with the database structure.
+Task:I should make it easier to be maintained. 
+Action:
+Use java JDBC to develop a data management tool.Write many APIs to allow others to manage it.
+Result:
+We only need to give several input arguments and the tool will put all related queries for us. Make it much easier to be maintained.
+
